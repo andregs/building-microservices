@@ -1,10 +1,12 @@
 :compat-mode:
 = Developing Microservices With Spring Boot 
 
-This is the code accompanying the Livelessons video training course, https://www.safaribooksonline.com/library/view/building-microservices-with/9780134192468/[_Building Microservices with Spring Boot_],
+This is the code accompanying the Livelessons video training course,
+https://learning.oreilly.com/videos/building-microservices-with/9780134678658/[_Building Microservices with Spring Boot_],
 by http://twitter.com/starbuxman[Josh Long] and http://twitter.com/phillip_webb[Phil Webb]. 
 
-NOTE: We're currently upgrading this codebase for a second video. Please use the `v1` branch if you want to see the previous version.
+NOTE: The authors use Spring Boot 1 during the lessons. In this fork, I upgraded
+the codebase for Spring Boot 2.
 
 == Introduction
 What makes a modern application? A modern application lives on the web. It
@@ -22,13 +24,17 @@ lighter and more productive than ever.
 This repository contains the example code covered in the LiveLesson video. Use
 the links below to jump to a specific topic:
 
-- Lesson 1: link:livelessons-bootstrap[Bootstrapping (Spring Boot 101)]
-- Lesson 2: link:livelessons-configuration[Using "Twelve-Factor" Style Configuration]
-- Lesson 3: link:livelessons-cloud[Reaching For The Clouds]
-- Lesson 4: link:livelessons-data[Working With Data]
+- Lesson 1: link:livelessons-bootstrap["Bootstrapping" (Spring Boot 101)]
+- Lesson 2: link:livelessons-configuration[Using "Twelve-Factor App" Style Configuration]
+- Lesson 3: link:livelessons-cloud[Reaching for The Clouds]
+- Lesson 4: link:livelessons-data[Working with Data]
 - Lesson 5: link:livelessons-rest[Giving Your Microservice a REST]
-- Lesson 6: link:livelessons-integration[Dealing With Integration and Batch Processing]
+- Lesson 6: link:livelessons-integration[Data Synchronization and Processing]
 - Lesson 7: link:livelessons-operations[Creating Operations-Friendly Microservices]
-- Lesson 8: link:livelessons-microservices[Choreographing Microservices]
-- Lesson 9: link:livelessons-web[Developing Web Applications]
-- Lesson 10: link:livelessons-security[Securing Microservices With Spring Security]
+- Lesson 8: link:livelessons-edge[Edge Services and Routing]
+- Lesson 9: link:livelessons-choreography[Operations at Scale]
+- Lesson 10: link:livelessons-web[Developing Web Applications]
+- Lesson 11: link:livelessons-security[Securing Microservices with Spring Security]
+- Lesson 12: link:livelessons-testing[Testing Microservices]
+- Lesson 13: link:livelessons-extending[Extending Spring Boot]
+- Lesson 14: link:livelessons-ide-and-tooling[IDE and Tooling Support]

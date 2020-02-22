@@ -8,6 +8,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.core.env.Environment;
 
 // -D and env vars work too!
+// e.g. java `-Dconfiguration.projectName=FOO -jar .\target\livelessons-configuration-basic-1.0.0-SNAPSHOT.jar
+// e.g. $env:CONFIGURATION_PROJECTNAME = 'NEWNAME'; mvn spring-boot:run
+
+// localhost:8080/actuator/configprops to see the values of all properties, including our custom ones
 
 @SpringBootApplication
 @EnableConfigurationProperties

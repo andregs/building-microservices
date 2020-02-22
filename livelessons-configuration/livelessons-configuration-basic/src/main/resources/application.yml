@@ -1,4 +1,11 @@
 configuration:
   projectName : Spring Boot
 
-
+management:
+  endpoint:
+    configprops:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: configprops

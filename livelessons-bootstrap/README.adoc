@@ -6,6 +6,6 @@ _Take your first steps with Spring Boot._
 - link:livelessons-bootstrap-cli[Spring Boot CLI]
 - link:livelessons-bootstrap-maven[Using Maven]
 - link:livelessons-bootstrap-gradle[Using Gradle]
-- link:livelessons-bootstrap-maven[Understanding Auto-configuration]
+- link:livelessons-bootstrap-autoconfiguration[Understanding Auto-configuration]
 
 TODO Jetty docs ac

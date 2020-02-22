@@ -9,5 +9,5 @@ Use the following commands to build run the application:
 
 ```
 $ ./gradlew build
-$ java -jar build/libs/livelessons-bootstrap-gradle-0.0.1-SNAPSHOT.jar
+$ ./gradlew bootRun
 ```

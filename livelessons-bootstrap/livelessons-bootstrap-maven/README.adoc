@@ -1,4 +1,3 @@
-:compat-mode:
 = Lesson 1: Bootstrapping (Using Maven)
 
 == Introduction
@@ -7,7 +6,9 @@ This example shows how Spring Boot works with Maven.
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
-$ mvn clean package
-$ java -jar target/livelessons-bootstrap-maven-1.0.0-SNAPSHOT.jar
-```
+[source]
+----
+mvn spring-boot:run
+----
+
+Then browse to http://localhost:8080/ to test the greeting message.

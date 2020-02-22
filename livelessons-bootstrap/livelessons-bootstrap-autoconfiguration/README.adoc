@@ -1,4 +1,3 @@
-:compat-mode:
 = Lesson 1: Bootstrapping (Understanding Auto-configuration)
 
 == Introduction
@@ -7,10 +6,11 @@ This example shows how Spring Boot auto-configuration works.
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
+[source]
+----
 $ mvn clean package
-$ java -jar target/livelessons-bootstrap-autoconfigure-1.0.0-SNAPSHOT.jar
-```
+$ mvn spring-boot:run
+----
 
 == About the code
 This example adds auto-configuration to show how the process generally works. The

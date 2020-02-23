@@ -6,14 +6,15 @@ This example shows how you can push a Spring Boot application to Cloud Foundry. 
 will need a https://run.pivotal.io/[Cloud Foundry account] and the
 http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed.
 
+You can also get a Lite (free) account from IBM. Detailed instructions available at:
+https://cloud.ibm.com/docs/cloud-foundry-public?topic=cloud-foundry-public-getting-started
+
 == Pushing to Cloud Foundry
 You can build and push the application as follows:
 
-```
+[source]
+----
 $ mvn clean package
-$ cf push <appname> -p target/livelessons-cloud-cloudfoundry-1.0.0-SNAPSHOT.jar
-```
-
-
-
+$ cf push ll-cf-demo -p .\target\livelessons-cloud-cloudfoundry-1.0.0-SNAPSHOT.jar -m 256M
+----
 

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS car;
 CREATE TABLE car (
 	id bigint NOT NULL,
 	make varchar(100),

@@ -7,21 +7,26 @@ write blob data.
 
 == Prerequisites
 You will need an http://aws.amazon.com[Amazon AWS] account with a S3 bucket which you
-can use for testing. To configure the account you need to create a
-`application-secrets.properties` file in the `src/main/resources` folder with your
-access and secret key:
+can use for testing. To configure the account you need to provide your AWS access and
+secret keys in `application.yml`
 
-```
-cloud.aws.credentials.accessKey=AKXXXXXXXXXXXXXXXXX
-cloud.aws.credentials.secretKey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[source]
+----
+cloud:
+  aws:
+    credentials:
+      access-key: AKXXXXXXXXXXXXXXXXX
+      secret-key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+----
 
-```
+You should also update `application.yml` with the name of your S3 bucket:
 
-You should also update `application.properties` with the name of your S3 bucket:
-
-```
-livelessons.s3.bucket=<name>
-```
+[source]
+----
+livelessons:
+  s3:
+    bucket: <name>
+----
 
 == Running the Application
 Launch `CloudS3Application` to run the application. It will write to the S3 bucket then

@@ -11,18 +11,22 @@ the build application jar.
 == Prerequisites
 Ensure that you have logged into Heroku and created an application:
 
-```
+[source]
+----
 $ heroku login
 $ heroku create -n
-```
+----
 
 You will need the name of the created application later.
 
 == Pushing to Heroku
 To build an push the application use the following command:
 
-```
+[source]
+----
 $ mvn clean package heroku:deploy -Dheroku.appName=<appname>
-```
+----
 
 NOTE: The upload to Heroku can take some time to complete.
+At the end, you'll get a "https://<appname>.herokuapp.com/ deployed to Heroku" message.
+Open that URL in the browser to test the application.

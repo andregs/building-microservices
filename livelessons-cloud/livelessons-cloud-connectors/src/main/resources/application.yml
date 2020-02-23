@@ -1,0 +1,10 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans
+  endpoint:
+    beans:
+      enabled: true
+# we don't need to setup the DB connection here
+# spring cloud connectors automatically binds our database (see manifest.yml)

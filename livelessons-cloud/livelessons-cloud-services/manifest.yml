@@ -1,4 +1,9 @@
 ---
-services:
-- ll-car-sql-database
-- ll-car-sql-database2
+applications:
+  - name: ll-cc
+    path: ./target/livelessons-cloud-services-1.0.0-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack
+    services:
+      - ll-car-sql-database
+      - ll-car-sql-database2

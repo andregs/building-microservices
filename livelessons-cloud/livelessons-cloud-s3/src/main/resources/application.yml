@@ -1,0 +1,14 @@
+livelessons:
+  s3:
+    bucket: andregs-livelessons
+
+cloud:
+  aws:
+    credentials:
+      # you have to provide your valid AWS credentials
+      access-key: AAAAAAAAAAAAAAAAAAAA
+      secret-key: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+    region:
+      static: us-east-2
+    stack:
+      auto: false

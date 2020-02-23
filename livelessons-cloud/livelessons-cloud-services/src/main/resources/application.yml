@@ -1,0 +1,14 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env
+  endpoint:
+    env:
+      enabled: true
+spring:
+  datasource:
+    url: ${cloud.services.ll-car-sql-database.connection.jdbcurl}
+    initialization-mode: ALWAYS
+    tomcat:
+      max-active: 1

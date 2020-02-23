@@ -12,32 +12,46 @@ using OSX you should use `Boot2Docker`.
 A link:Dockerfile[Dockerfile] is included with this project to allow you to build an image
 from the command line. You can use the following commands:
 
-```
+[source]
+----
 $ mvn clean package
 $ docker build -t livelessons-cloud-docker .
-```
+----
 
 == Building using Maven
 This project also includes a Maven example which uses the `docker-maven-plugin` from
-Spotify. To build using mave you need to enable the `docker` profile:
+Spotify. To build using maven you need to enable the `docker` profile:
 
-```
-$ mvn clean package -Pdocker
-```
+[source]
+----
+$ mvn clean package -P docker
+----
 
 == Starting the container
 
 You need to remember to start the Docker container with correct port mappings. The
 following command should be used:
 
-```
+[source]
+----
 $ docker run -d -p 8080:8080 --name livelessons-cloud-docker livelessons-cloud-docker
-```
+$ docker run -d -p 9090:8080 --name livelessons-cloud-boot livelessons-cloud-boot
+----
+
+You can use the following commands to inspect the logs of the running container:
+
+[source]
+----
+$ docker logs livelessons-cloud-docker
+$ docker logs livelessons-cloud-boot
+----
 
 To test the application is running you can issue one of the following commands (you
 only need to use the `boot2docker` variant on OSX.
 
-```
+[source]
+----
 $ curl http://$(boot2docker ip 2>/dev/null):8080
 $ curl http://localhost:8080
-```
+$ curl http://localhost:9090
+----

@@ -1,16 +1,15 @@
 package demo;
 
-import java.util.Arrays;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.support.collections.DefaultRedisMap;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.Map;
 
 @Component
 public class Demo implements CommandLineRunner {
@@ -52,9 +51,13 @@ public class Demo implements CommandLineRunner {
 	}
 
 	private void caching() {
-		logger.info("----> 1 " + this.service.execute("boot"));
-		logger.info("----> 2 " + this.service.execute("boot"));
-		logger.info("----> 3 " + this.service.execute("boot"));
+		logger.info("not cached -> 1 " + this.service.executeNotCached("not cached"));
+		logger.info("not cached -> 2 " + this.service.executeNotCached("not cached"));
+		logger.info("not cached -> 3 " + this.service.executeNotCached("not cached"));
+
+		logger.info("cached -----> 1 " + this.service.executeCached("cached"));
+		logger.info("cached -----> 2 " + this.service.executeCached("cached"));
+		logger.info("cached -----> 3 " + this.service.executeCached("cached"));
 	}
 
 }

@@ -12,6 +12,7 @@ public class DataJpaApplication {
 	@Bean
 	public InitializingBean seedDatabase(CarRepository repository) {
 		return () -> {
+			System.out.println("Creating data");
 			repository.save(new Car("Honda", "Civic", 1997));
 			repository.save(new Car("Honda", "Accord", 2003));
 			repository.save(new Car("Ford", "Escort", 1985));

@@ -2,13 +2,14 @@ package demo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Car {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String make;
@@ -48,7 +49,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return make + " " + model + " " + year + " " + this.color;
+		return id + " " + make + " " + model + " " + year + " " + this.color;
 	}
 
 }

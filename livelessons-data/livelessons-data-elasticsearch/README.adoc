@@ -2,18 +2,25 @@
 = Lesson 4: Working With Data (Elasticsearch)
 
 == Introduction
-This example shows how you can connect your microservce to Elasticsearch.
+This example shows how you can connect your microservce to Elasticsearch. In order to run
+an instance of elasticsearch on docker, you can run the following command:
+
+[source]
+----
+$ docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:6.8.6
+----
 
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
+[source]
+----
 $ mvn clean package
 $ java -jar target/livelessons-data-elasticsearch-1.0.0-SNAPSHOT.jar
-```
+----
 
-The example uses an embedded elasticsearch server to store data. If you want to talk
-to a real server you can set `spring.data.elasticsearch.cluster-name` and
+The example uses a local server to store data. If you want to talk to a remote server you
+can set `spring.data.elasticsearch.cluster-name` and
 `spring.data.elasticsearch.cluster-nodes` properties.
 
 == Understanding the code

@@ -4,13 +4,23 @@
 == Introduction
 This example shows how you can use the MongoDB document store.
 
+== Prerequisites
+You need a local MongoDB server to store data. Use the following command to create a
+MongoDB server in a docker instance:
+
+[source]
+----
+$ docker run -p 27017:27017 --name my-mongo -d mongo
+----
+
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
+[source]
+----
 $ mvn clean package
 $ java -jar target/livelessons-data-mongodb-1.0.0-SNAPSHOT.jar
-```
+----
 
 == Understanding the code
 The same domain to the JPA sample is used with this demo. Rather than being a `@Entity`

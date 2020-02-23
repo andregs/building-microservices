@@ -7,10 +7,14 @@ This example shows how you can expose a Spring Data Repoistory over REST.
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
+[source]
+----
 $ mvn clean package
 $ java -jar target/livelessons-data-rest-1.0.0-SNAPSHOT.jar
-```
+----
+
+Note that integration tests for the REST functionality will be executed as part of the
+Maven build process. See the `DataRestApplicationTest` class.
 
 == Understanding the code
 This is exactly the same code as the JPA example, except we have an additional

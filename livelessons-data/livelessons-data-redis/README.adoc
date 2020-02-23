@@ -6,15 +6,27 @@ This example shows how you can use Redis with Spring Boot.
 
 == Prerequisites
 You need a local or remote Redis server to store data. If you are using a remote server
-edit the `application.properties` files.
+edit the `application.properties` files. If you want a local server, you can e.g. run
+Redis on docker. The following commands create a server and then start monitoring the
+incoming commands in that Redis instance:
+
+[source]
+----
+$ docker network create my-redis-net
+$ docker run -p 6379:6379 --name my-redis -h my-redis --network my-redis-net -d redis
+$ docker run -it --network my-redis-net --rm redis redis-cli -h my-redis
+my-redis:6379> MONITOR
+OK
+----
 
 == Building and running the sample
 Use the following commands to build run the application:
 
-```
+[source]
+----
 $ mvn clean package
 $ java -jar target/livelessons-redis-1.0.0-SNAPSHOT.jar
-```
+----
 
 == Understanding the code
 The `Demo` class shows how you can use `RedisTemplate` to access data and how Redis can

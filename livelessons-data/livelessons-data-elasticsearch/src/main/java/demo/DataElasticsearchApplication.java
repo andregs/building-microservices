@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
@@ -26,7 +26,7 @@ public class DataElasticsearchApplication {
 
 	@Bean
 	public CommandLineRunner example(CarRepository repository,
-			ElasticsearchTemplate template) {
+			ElasticsearchRestTemplate template) {
 		return (args) -> {
 			System.err.println("From the repository...");
 			repository.findByMakeIgnoringCase("fOrD").forEach(System.err::println);

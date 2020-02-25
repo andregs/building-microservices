@@ -2,13 +2,13 @@ package demo;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 @Configuration
-public class SimpleRepositoryRestMvcConfiguration extends RepositoryRestMvcConfiguration {
+public class SimpleRepositoryRestMvcConfiguration implements RepositoryRestConfigurer {
 
 	@Override
-	protected void configureRepositoryRestConfiguration(
+	public void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
 		config.exposeIdsFor(Person.class);
 	}

@@ -1,10 +1,5 @@
 package demo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -15,13 +10,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/people/{id}/photo")
@@ -39,9 +35,10 @@ public class PersonPhotoRestController {
 				"The path '" + this.root.getAbsolutePath() + "' must exist.");
 	}
 
+	/* if you browse to this endpoint you should get the FileNotFoundException since no photo has been uploaded */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Resource> read(@PathVariable Long id) throws Exception {
-		Person person = this.personRepository.findOne(id);
+		Person person = this.personRepository.findById(id).get();
 		File file = fileFor(person);
 		if (!file.exists()) {
 			throw new FileNotFoundException(file.getAbsolutePath());
@@ -52,10 +49,11 @@ public class PersonPhotoRestController {
 		return new ResponseEntity<>(resource, httpHeaders, HttpStatus.OK);
 	}
 
+	/* upload a pic via postman by sending no headers, choose a form-data body with a key named 'file' with your jpg */
 	@RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT })
 	public ResponseEntity<?> write(@PathVariable Long id,
 			@RequestParam MultipartFile file) throws Exception {
-		Person person = this.personRepository.findOne(id);
+		Person person = this.personRepository.findById(id).get();
 		FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(fileFor(person)));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(id)
 				.toUri();

@@ -1,14 +1,10 @@
 package demo;
 
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
-import org.springframework.integration.dsl.support.Function;
 import org.springframework.integration.websocket.ServerWebSocketContainer;
 import org.springframework.integration.websocket.outbound.WebSocketOutboundMessageHandler;
 import org.springframework.messaging.MessageChannel;
@@ -18,6 +14,10 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.Executors;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * This sets up a Web Socket flow that takes incoming messages (against {@code /hi} REST

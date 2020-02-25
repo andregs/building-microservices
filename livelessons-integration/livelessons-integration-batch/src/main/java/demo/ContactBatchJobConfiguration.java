@@ -1,7 +1,5 @@
 package demo;
 
-import javax.sql.DataSource;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -24,6 +22,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class ContactBatchJobConfiguration {
 
@@ -41,7 +41,7 @@ public class ContactBatchJobConfiguration {
 			{
 				setLineTokenizer(new DelimitedLineTokenizer() {
 					{
-						setNames(new String[] { "firstName", "lastName", "email" });
+						setNames("firstName", "lastName", "email");
 					}
 				});
 				setFieldSetMapper(new BeanWrapperFieldSetMapper<Contact>() {

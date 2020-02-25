@@ -30,8 +30,9 @@ import java.util.List;
 @EnableBatchProcessing
 public class BatchConfiguration {
 
+    /* We accept the file that we want to read as a job parameter. */
     @Bean
-    @StepScope
+    @StepScope // recreates a new reader each time our job runs
     FlatFileItemReader<Person> flatFileItemReader(@Value("#{jobParameters[file]}") File file) {
         FlatFileItemReader<Person> r = new FlatFileItemReader<>();
         r.setResource(new FileSystemResource(file));
@@ -39,7 +40,7 @@ public class BatchConfiguration {
             {
                 this.setLineTokenizer(new DelimitedLineTokenizer(",") {
                     {
-                        this.setNames(new String[]{"first", "last", "email"});
+                        this.setNames("first", "last", "email");
                     }
                 });
                 this.setFieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {
@@ -52,6 +53,7 @@ public class BatchConfiguration {
         return r;
     }
 
+    /* We write our people in a H2 database */
     @Bean
     JdbcBatchItemWriter<Person> jdbcBatchItemWriter(DataSource h2) {
         JdbcBatchItemWriter<Person> w = new JdbcBatchItemWriter<>();
@@ -61,6 +63,8 @@ public class BatchConfiguration {
         return w;
     }
 
+    /* A job that reads Person data from a file and writes them in a database.
+    * Note that Spring executes all batch jobs by default, but we disabled that in `application.properties` */
     @Bean
     Job personEtl(JobBuilderFactory jobBuilderFactory,
             StepBuilderFactory stepBuilderFactory,
@@ -79,21 +83,25 @@ public class BatchConfiguration {
                 .build();
     }
 
-    //@Bean
+    /* This bean runs our job. We have to execute the app with `--file=people.csv` */
+    @Bean
     CommandLineRunner runner(JobLauncher launcher,
                              Job job,
-                             @Value("${file}") File in,
+                             @Value("${file}") File in, // we defined this prop here and we'll pass it through command-line
                              JdbcTemplate jdbcTemplate) {
         return args -> {
 
+            // launches our job, passing the file parameter
             JobExecution execution = launcher.run(job,
                     new JobParametersBuilder()
-                            .addString("file", in.getAbsolutePath())
+                            .addString("file", in.getAbsolutePath()) // our Reader requires this param
                             .toJobParameters());
 
             System.out.println("execution status: " + execution.getExitStatus().toString());
 
-            List<Person> personList = jdbcTemplate.query("select * from PEOPLE", (resultSet, i) -> new Person(resultSet.getString("first"),
+            // queries the DB to assert that the people are there
+            List<Person> personList = jdbcTemplate.query("select * from PEOPLE", (resultSet, i) -> new Person(
+                    resultSet.getString("first"),
                     resultSet.getString("last"),
                     resultSet.getString("email")));
 

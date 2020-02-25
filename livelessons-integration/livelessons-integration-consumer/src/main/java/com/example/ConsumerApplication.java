@@ -15,10 +15,15 @@ interface MessageChannels {
     SubscribableChannel input();
 }
 
+/* You can run RabbbitMQ locally with `docker run -d -h my-rabbit --name my-rabbit -p 5672:5672 rabbitmq` */
 @EnableBinding(MessageChannels.class)
 @SpringBootApplication
 public class ConsumerApplication {
 
+    /* This listener receives a greeting that is sent by `livelessons-integration-producer`
+     * and prints it out in the console.
+     *
+     * See application.yml properties. */
     @Bean
     IntegrationFlow greetingsFlow(MessageChannels channels) {
         return IntegrationFlows.from(channels.input())

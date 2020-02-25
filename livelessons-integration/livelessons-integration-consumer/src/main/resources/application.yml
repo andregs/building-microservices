@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input: # this is our com.example.MessageChannels.input method
+          destination: greetings # agreed upon rendezvous point between both producer and the consumer
+          group: greetings-group # only one instance in this group will get an incoming message (by default everyone gets the message)
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              durableSubscription: true # consumes undelivered messages in the broker

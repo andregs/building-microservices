@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-dataflow-server-local</artifactId>
+			<artifactId>spring-cloud-starter-dataflow-server</artifactId>
 		</dependency>
 
 		<dependency>

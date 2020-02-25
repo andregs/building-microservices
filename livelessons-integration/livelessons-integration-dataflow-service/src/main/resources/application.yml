@@ -1,0 +1,6 @@
+server:
+  port: 9393
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryDeployerAutoConfiguration

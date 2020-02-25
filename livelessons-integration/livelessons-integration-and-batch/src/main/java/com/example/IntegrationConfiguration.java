@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.channel.MessageChannels;
-import org.springframework.integration.dsl.file.Files;
+import org.springframework.integration.dsl.MessageChannels;
+import org.springframework.integration.file.dsl.Files;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.Message;
@@ -29,6 +29,12 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/* To test this, put a CSV file in ${user.home}/Desktop/in dir and check the console output.
+* Then, call `GET /files?file=valid/path/to/file.csv` and check the console output.
+*
+* The exercise here is to demonstrate that we can use MessageChannels to connect different
+* flows explicitly. We can call our job via an event in our filesystem or by calling a REST
+* endpoint. */
 @Configuration
 public class IntegrationConfiguration {
 
@@ -56,6 +62,11 @@ public class IntegrationConfiguration {
         }
     }
 
+    /* Listen to the message channel and whenever we get an incoming file:
+    * 1. prints debug info
+    * 2. creates a job launch request
+    * 3. triggers the batch job to process that file
+    * 4. prints out the job execution results */
     @Bean
     IntegrationFlow batchJobFlow(Job job,
                                  JdbcTemplate jdbcTemplate,
@@ -63,10 +74,10 @@ public class IntegrationConfiguration {
                                  MessageChannel files) {
 
         return IntegrationFlows.from(files)
-                .transform((GenericTransformer<Object,JobLaunchRequest>) file -> {
+                .transform(file -> {
                     System.out.println(file.toString());
                     System.out.println(file.getClass());
-                    return null ;
+                    return file ;
                 })
                 .transform((GenericTransformer<File, JobLaunchRequest>) file -> {
                     JobParameters jp = new JobParametersBuilder()
@@ -87,19 +98,17 @@ public class IntegrationConfiguration {
                     return null;
                 })
                 .get();
-
     }
 
+    /* Monitor the filesystem `dir` and send new incoming files through our message channel. */
     @Bean
-    IntegrationFlow incomingFiles(@Value("${HOME}/Desktop/in") File dir) {
-
+    IntegrationFlow incomingFiles(@Value("${user.home}/Desktop/in") File dir, MessageChannel files) {
         return IntegrationFlows.from(
                 Files.inboundAdapter(dir)
-                        .preventDuplicates()
+                        .preventDuplicates(true)
                         .autoCreateDirectory(true),
                 poller -> poller.poller(spec -> spec.fixedRate(1, TimeUnit.SECONDS)))
-                .channel( this.files())
+                .channel(files)
                 .get();
-
     }
 }

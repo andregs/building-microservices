@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        output: # this is our demo.MessageChannels.output method
+          destination: greetings # agreed upon rendezvous point between both producer and the consumer
